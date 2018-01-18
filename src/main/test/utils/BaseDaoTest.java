@@ -27,9 +27,11 @@ public class BaseDaoTest {
 
     @Test
     public void seperatorTest() throws ClassNotFoundException {
-        FileSystemClassLoader fileSystemClassLoader = new FileSystemClassLoader("/Users/zeeker/private/project/keychain/target/classes");
-        Class<?> clazz = fileSystemClassLoader.loadClass("com.zeeker.keychain.model.Keychain");
-        System.out.println(clazz);
+        Integer a1 = 9;
+        Integer a2 = 5;
+        int a =  (int)Math.ceil((double) a1 / (double)a2);
+
+        System.out.println((int) a);
     }
 
     @Test

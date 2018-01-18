@@ -2,7 +2,7 @@
  * @fileName :     BaseDaoImpl
  * @author :       zeeker
  * @date :         11/01/2018 16:22
- * @description :
+ * @description :   使用自建数据库框架
  */
 
 package com.zeeker.keychain.dao.impl.jdbc;
