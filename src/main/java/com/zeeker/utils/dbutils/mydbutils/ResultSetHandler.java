@@ -1,4 +1,4 @@
-package com.zeeker.utils.jdbc;
+package com.zeeker.utils.dbutils.mydbutils;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

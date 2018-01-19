@@ -7,18 +7,11 @@
 
 package utils;
 
-import com.zeeker.keychain.dao.BaseDao;
 import com.zeeker.keychain.dao.KeychainDao;
-import com.zeeker.keychain.dao.impl.jdbc.BaseDaoImpl;
-import com.zeeker.keychain.dao.impl.jdbc.KeychainDaoImpl;
+import com.zeeker.keychain.dao.impl.mydbutils.KeychainDaoImpl;
 import com.zeeker.keychain.model.Keychain;
-import com.zeeker.utils.classLoader.FileSystemClassLoader;
-import com.zeeker.utils.jdbc.JdbcUtil;
-import org.apache.commons.beanutils.BeanUtils;
 import org.junit.Test;
-import sun.applet.AppletClassLoader;
 
-import java.io.File;
 import java.sql.*;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +51,7 @@ public class BaseDaoTest {
     @Test
     public void jdbcTest() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zeeker?nuseUnicode=true&characterEncoding=UTF-8", "root", "zhou");
+        Connection connection = DriverManager.getConnection("mydbutils:mysql://localhost:3306/zeeker?nuseUnicode=true&characterEncoding=UTF-8", "root", "zhou");
 
         PreparedStatement preparedStatement = connection.prepareStatement("select * from keychain");
         ResultSet resultSet = preparedStatement.executeQuery();

@@ -5,14 +5,14 @@
  * @description :   使用自建数据库框架
  */
 
-package com.zeeker.keychain.dao.impl.jdbc;
+package com.zeeker.keychain.dao.impl.mydbutils;
 
 
 import com.zeeker.keychain.dao.BaseDao;
 import com.zeeker.keychain.model.BaseObject;
-import com.zeeker.utils.jdbc.BeanListHandler;
-import com.zeeker.utils.jdbc.DbNameConveter;
-import com.zeeker.utils.jdbc.JdbcUtil;
+import com.zeeker.utils.dbutils.mydbutils.BeanListHandler;
+import com.zeeker.utils.dbutils.mydbutils.DbNameConveter;
+import com.zeeker.utils.dbutils.mydbutils.JdbcUtil;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;

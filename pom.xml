@@ -13,6 +13,11 @@
     <junit.version>RELEASE</junit.version>
     <jstl.version>1.2</jstl.version>
     <beanutils.verson>1.9.3</beanutils.verson>
+    <dbcp.version>1.4</dbcp.version>
+    <commons.pool.version>1.6</commons.pool.version>
+    <dbutils.version>1.7</dbutils.version>
+    <c3p0.version>0.9.5.2</c3p0.version>
+    <mchange.common.version>0.2.11</mchange.common.version>
   </properties>
 
   <dependencies>
@@ -42,6 +47,40 @@
       <artifactId>commons-beanutils</artifactId>
       <version>${beanutils.verson}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>${dbcp.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-pool/commons-pool -->
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>${commons.pool.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+    <dependency>
+      <groupId>commons-dbutils</groupId>
+      <artifactId>commons-dbutils</artifactId>
+      <version>1.7</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${c3p0.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.mchange/mchange-commons-java -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>mchange-commons-java</artifactId>
+      <version>${mchange.common.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>

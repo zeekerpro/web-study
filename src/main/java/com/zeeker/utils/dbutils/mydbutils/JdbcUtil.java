@@ -5,7 +5,7 @@
  * @description :  自定义jdbc框架
  */
 
-package com.zeeker.utils.jdbc;
+package com.zeeker.utils.dbutils.mydbutils;
 
 import java.sql.*;
 import java.util.List;

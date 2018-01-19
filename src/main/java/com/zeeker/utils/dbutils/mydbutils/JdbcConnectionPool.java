@@ -5,7 +5,7 @@
  * @description :  自定义数据库连接池
  */
 
-package com.zeeker.utils.jdbc;
+package com.zeeker.utils.dbutils.mydbutils;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
@@ -38,10 +38,10 @@ public class JdbcConnectionPool implements DataSource{
             String configFilePath = JdbcConnectionPool.class.getClassLoader().getResource("config.properties").getPath();
             FileInputStream fileInputStream = new FileInputStream(configFilePath);
             properties.load(fileInputStream);
-            Class.forName(properties.getProperty("jdbc.driver"));
-            url = properties.getProperty("jdbc.url");
-            username = properties.getProperty("jdbc.username");
-            password = properties.getProperty("jdbc.password");
+            Class.forName(properties.getProperty("mydbutils.driver"));
+            url = properties.getProperty("mydbutils.url");
+            username = properties.getProperty("mydbutils.username");
+            password = properties.getProperty("mydbutils.password");
 
             for (int i = 0; i < INIT_CONNECTION_COUNT; i++){
                 Connection connection = DriverManager.getConnection(url, username, password);

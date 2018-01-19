@@ -5,7 +5,7 @@
  * @description :
  */
 
-package com.zeeker.utils.jdbc;
+package com.zeeker.utils.dbutils.mydbutils;
 
 import org.apache.commons.beanutils.BeanUtils;
 import java.lang.reflect.InvocationTargetException;

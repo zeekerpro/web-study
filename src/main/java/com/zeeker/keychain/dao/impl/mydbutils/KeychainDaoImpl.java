@@ -5,7 +5,7 @@
  * @description :
  */
 
-package com.zeeker.keychain.dao.impl.jdbc;
+package com.zeeker.keychain.dao.impl.mydbutils;
 
 import com.zeeker.keychain.dao.KeychainDao;
 import com.zeeker.keychain.model.Keychain;

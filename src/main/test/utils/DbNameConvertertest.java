@@ -7,7 +7,7 @@
 
 package utils;
 
-import com.zeeker.utils.jdbc.DbNameConveter;
+import com.zeeker.utils.dbutils.mydbutils.DbNameConveter;
 import org.junit.Test;
 
 public class DbNameConvertertest {

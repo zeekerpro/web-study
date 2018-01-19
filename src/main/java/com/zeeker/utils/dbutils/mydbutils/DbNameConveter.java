@@ -5,7 +5,7 @@
  * @description :  数据库和bean的名称转化
  */
 
-package com.zeeker.utils.jdbc;
+package com.zeeker.utils.dbutils.mydbutils;
 
 public class DbNameConveter {
 
