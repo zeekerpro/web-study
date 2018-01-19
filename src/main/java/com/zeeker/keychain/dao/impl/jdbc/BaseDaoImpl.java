@@ -85,8 +85,6 @@ public abstract class BaseDaoImpl<T extends BaseObject, ID extends Serializable 
         } catch (IntrospectionException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
