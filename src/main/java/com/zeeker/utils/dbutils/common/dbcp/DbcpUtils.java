@@ -32,6 +32,19 @@ public class DbcpUtils {
         }
     }
 
+
+    /**
+     * 返回数据库连接池
+     * @return
+     */
+    public static DataSource getDataSource(){
+        return dataSource;
+    }
+
+    /**
+     * 从连接池中获取一条连接
+     * @return
+     */
     public static Connection getConnection(){
         Connection connection = null;
         try {

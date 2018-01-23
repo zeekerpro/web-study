@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BeanListHandler<T> implements ResultSetHandler<T>{
+    public BeanListHandler() { }
+
     /**
      * 将 resultSet 转换为对应的对象列表
      * @param resultSet

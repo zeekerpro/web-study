@@ -19,6 +19,18 @@ public class C3p0Utils {
         cpds = new ComboPooledDataSource("mysql");
     }
 
+    /**
+     * 返回连接池
+     * @return
+     */
+    public static ComboPooledDataSource getDataSource() {
+        return cpds;
+    }
+
+    /**
+     * 从连接池中获取一条连接
+     * @return
+     */
     public Connection getConnection(){
         Connection connection = null;
         try {
@@ -28,5 +40,7 @@ public class C3p0Utils {
         }
         return connection;
     }
+
+    
 
 }
