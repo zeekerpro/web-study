@@ -15,6 +15,8 @@
     <beanutils.verson>1.9.3</beanutils.verson>
     <dbcp.version>1.4</dbcp.version>
     <commons.pool.version>1.6</commons.pool.version>
+    <commons.io.version>2.6</commons.io.version>
+    <commons.fileupload.version>1.3.3</commons.fileupload.version>
     <dbutils.version>1.7</dbutils.version>
     <c3p0.version>0.9.5.2</c3p0.version>
     <mchange.common.version>0.2.11</mchange.common.version>
@@ -80,6 +82,22 @@
       <artifactId>mchange-commons-java</artifactId>
       <version>${mchange.common.version}</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons.io.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>${commons.fileupload.version}</version>
+    </dependency>
+
+
 
   </dependencies>
 
