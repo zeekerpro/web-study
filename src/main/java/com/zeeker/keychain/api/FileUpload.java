@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @WebServlet(value = "/upload")
 public class FileUpload extends HttpServlet {
@@ -84,6 +85,7 @@ public class FileUpload extends HttpServlet {
                             throw new RuntimeException("不支持的文件类型: " +  extName);
                         }
                         InputStream inputStream = null;
+                        String saveFileName = generateFileName(fileName);
                         OutputStream outputStream = new FileOutputStream(savePath + File.separator + fileName);
                         try {
                             inputStream = fileItem.getInputStream();
@@ -121,5 +123,14 @@ public class FileUpload extends HttpServlet {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 针对上传文件的文件名生成一个唯一的文件名，防止文件重名
+     * @param fileName
+     * @return
+     */
+    private String generateFileName(String fileName) {
+        return UUID.randomUUID().toString() + "_" + fileName;
     }
 }
