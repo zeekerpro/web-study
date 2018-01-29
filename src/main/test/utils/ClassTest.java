@@ -10,6 +10,13 @@ package utils;
 import org.junit.Test;
 
 public class ClassTest {
+
+    @Test
+    public void longTest(){
+        System.out.println(10000 / 10000);
+    }
+
+
     @Test
     public void threadLodalTest(){
         ThreadLocal<Integer>  threadLocal = new ThreadLocal<>();

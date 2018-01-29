@@ -9,6 +9,7 @@ package com.zeeker.keychain.api;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
+import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -63,6 +64,26 @@ public class FileUpload extends HttpServlet {
             upload.setHeaderEncoding("utf-8");
             // 设置单个上传文件的最大大小
             upload.setFileSizeMax(1024 * 1024 * 5);
+            // 设置解析器监听解析进度
+            upload.setProgressListener(new ProgressListener() {
+                private  long megaBytes = -1;
+                @Override
+                public void update(long pBytesRead, long pContentLength, int pItems) {
+
+                    long mBytes = pBytesRead / 1000000;
+                    if (megaBytes == mBytes) {
+                        return;
+                    }
+                    megaBytes = mBytes;
+                    System.out.println("We are currently reading item " + pItems);
+                    if (pContentLength == -1) {
+                        System.out.println("So far, " + pBytesRead + " bytes have been read.");
+                    } else {
+                        System.out.println("So far, " + pBytesRead + " of " + pContentLength
+                                + " bytes have been read.");
+                    }
+                }
+            });
             // 判断删除的数据是不是上传表单数据
             if (ServletFileUpload.isMultipartContent(req)) {
                 // 3. 解析request
