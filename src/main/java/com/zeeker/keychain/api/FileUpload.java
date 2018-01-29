@@ -21,6 +21,8 @@ import java.util.List;
 
 @WebServlet(value = "/upload")
 public class FileUpload extends HttpServlet {
+    private static final long serialVersionUID = -1581940926334627058L;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
@@ -37,7 +39,7 @@ public class FileUpload extends HttpServlet {
             DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
             // 2. 获取解析器
             ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
-            upload.setHeaderEncoding("utf-8");
+            upload.setHeaderEncoding("utf-8");//
             // 判断删除的数据是不是上传表单数据
             if (ServletFileUpload.isMultipartContent(req)) {
                 // 3. 解析request
