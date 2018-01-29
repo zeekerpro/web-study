@@ -30,7 +30,7 @@ public class FileUpload extends HttpServlet {
 
     static {
         supportFileType.add(".jpeg");
-//        supportFileType.add(".png");
+        supportFileType.add(".png");
         supportFileType.add(".jpg");
     }
 
@@ -85,8 +85,11 @@ public class FileUpload extends HttpServlet {
                             throw new RuntimeException("不支持的文件类型: " +  extName);
                         }
                         InputStream inputStream = null;
+                        // 保存的文件名
                         String saveFileName = generateFileName(fileName);
-                        OutputStream outputStream = new FileOutputStream(savePath + File.separator + fileName);
+                        // 子目录
+                        File saveFileChildPath = generateSavePath(savePath, fileName);
+                        OutputStream outputStream = new FileOutputStream(saveFileChildPath.getPath() + File.separator + saveFileName);
                         try {
                             inputStream = fileItem.getInputStream();
                             int len = 0;
@@ -125,8 +128,27 @@ public class FileUpload extends HttpServlet {
         }
     }
 
+
     /**
-     * 针对上传文件的文件名生成一个唯一的文件名，防止文件重名
+     * 根据文件名生成文件的保存目录-hash算法产生目录
+     * @param path : 总目录
+     * @param fileName
+     * @return
+     */
+    public File generateSavePath(String path, String fileName){
+        int hashcode = fileName.hashCode();
+        int firstdir = hashcode & 0xf;
+        int seconddir = (hashcode>>4) & 0xf;
+        String savedir = path + File.separator + firstdir + File.separator + seconddir;
+        File saveFile = new File(savedir);
+        if (!saveFile.exists()){
+            saveFile.mkdirs();
+        }
+        return saveFile;
+    }
+
+    /**
+     * 针对上传文件的文件名生成一个唯一的文件名，防止文件覆盖
      * @param fileName
      * @return
      */
