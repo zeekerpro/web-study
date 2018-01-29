@@ -17,5 +17,7 @@ public class ClassTest {
         threadLocal.set(80);
         System.out.println(threadLocal.get());
         System.out.println(threadLocal.get());
+
+        throw new RuntimeException("不支持的文件类型");
     }
 }
