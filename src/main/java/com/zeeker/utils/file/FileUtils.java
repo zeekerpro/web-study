@@ -100,7 +100,7 @@ public class FileUtils {
         }
         //通知浏览器下载方式打开
         try {
-            response.setHeader("content-disposition", "attachment;filename" + URLEncoder.encode(fileUUIDName,"utf-8"));
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileUUIDName,"utf-8"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
