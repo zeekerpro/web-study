@@ -7,7 +7,7 @@
 
 package com.zeeker.keychain.api;
 
-import com.zeeker.utils.file.FileUtils;
+import com.zeeker.utils.webUtil.FileUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(value = "/file/list")
 public class FileListApi extends HttpServlet{

@@ -5,7 +5,7 @@
  * @description :  文件上传下载工具类
  */
 
-package com.zeeker.utils.file;
+package com.zeeker.utils.webUtil;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.ProgressListener;
@@ -68,13 +68,7 @@ public class FileUtils {
                 if (!isSupport(fileName)){
                     throw  new RuntimeException("不支持的文件类型!");
                 }
-                try{
-                    // 保存文件
-                    saveFile(fileItem);
-                } finally {
-                    // 删除临时文件
-                    fileItem.delete();
-                }
+                saveFile(fileItem);
             }
         }
     }
@@ -228,6 +222,7 @@ public class FileUtils {
                     e.printStackTrace();
                 }
             }
+            fileItem.delete();
         }
     }
 

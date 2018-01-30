@@ -5,9 +5,8 @@
  * @description :  request 解析器
  */
 
-package com.zeeker.utils;
+package com.zeeker.utils.webUtil;
 
-import com.zeeker.utils.file.FileUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
@@ -29,7 +28,7 @@ public class RequestParser {
      * @param request
      * @return
      */
-    public static Map<String, List<FileItem>> parse(HttpServletRequest request){
+    public static Map<String, List<FileItem>> parse(HttpServletRequest request) throws FileUploadBase.FileSizeLimitExceededException {
         Map<String, List<FileItem>> map = new HashMap<>();
         List<FileItem> normalItems = new ArrayList<>();
         List<FileItem> multipartItems = new ArrayList<>();
@@ -48,7 +47,7 @@ public class RequestParser {
                 map.put(MULTIPART_ITEMS, multipartItems);
             } catch (FileUploadBase.FileSizeLimitExceededException e){
                 e.printStackTrace();
-                throw  new RuntimeException("文件大小超出限制");
+                throw e;
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
