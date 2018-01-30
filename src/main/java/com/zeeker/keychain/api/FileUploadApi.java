@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @WebServlet(value = "/upload")
-public class FileUpload extends HttpServlet {
+public class FileUploadApi extends HttpServlet {
     private static final long serialVersionUID = -1581940926334627058L;
 
     @Override

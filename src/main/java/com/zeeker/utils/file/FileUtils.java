@@ -12,7 +12,9 @@ import org.apache.commons.fileupload.ProgressListener;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -85,6 +87,45 @@ public class FileUtils {
         List<File> files = new ArrayList<>();
         listFiles(SAVE_PATH, files);
         return files;
+    }
+
+    /**
+     * 下载文件
+     * @param fileUUIDName
+     */
+    public static void download(String fileUUIDName, HttpServletResponse response) throws FileNotFoundException {
+        File file = getFile(fileUUIDName);
+        if (!file.exists()){
+            throw new FileNotFoundException("文件不存在：" + fileUUIDName);
+        }
+        //通知浏览器下载方式打开
+        try {
+            response.setHeader("content-disposition", "attachment;filename" + URLEncoder.encode(fileUUIDName,"utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        FileInputStream inputStream = new FileInputStream(file);
+        OutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+            int len = 0;
+            byte[] buffer = new byte[1024];
+            while ((len = inputStream.read(buffer)) > 0){
+                outputStream.write(buffer, 0 , len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (inputStream != null){
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
     }
 
     /**
@@ -226,7 +267,7 @@ public class FileUtils {
     private static File getFile(String fileUUIDName){
         String originFileName = getOriginFileName(fileUUIDName);
         File dir = getFileDir(originFileName);
-        return new File(dir.getPath() + File.separator + "_" + fileUUIDName);
+        return new File(dir.getPath() + File.separator  + fileUUIDName);
     }
 
     /**
@@ -257,7 +298,7 @@ public class FileUtils {
      * @param fileUUIDName
      * @return
      */
-    private static String getOriginFileName(String fileUUIDName){
+    public static String getOriginFileName(String fileUUIDName){
         return fileUUIDName.substring(fileUUIDName.indexOf("_") + 1);
     }
 
