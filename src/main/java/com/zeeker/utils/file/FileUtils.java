@@ -69,10 +69,36 @@ public class FileUtils {
                 try{
                     // 保存文件
                     saveFile(fileItem);
-                }finally {
+                } finally {
                     // 删除临时文件
                     fileItem.delete();
                 }
+            }
+        }
+    }
+
+    /**
+     * 列出所有文件
+     * @return
+     */
+    public static List<File> getAllFiles(){
+        List<File> files = new ArrayList<>();
+        listFiles(SAVE_PATH, files);
+        return files;
+    }
+
+    /**
+     * 递归获取文件
+     * @param file
+     * @param list
+     */
+    private static void listFiles(File file, List<File> list){
+        if (file.isFile()){
+            list.add(file);
+        }else {
+            File[] childFiles = file.listFiles();
+            for (File chilsFile : childFiles){
+                listFiles(chilsFile, list);
             }
         }
     }
@@ -133,15 +159,10 @@ public class FileUtils {
      * @param fileItem
      */
     private static void saveFile(FileItem fileItem) {
-        // 生成保存文件的子目录
-        File savePath = getSavePath(fileItem);
-        // 为了防止文件覆盖，给每个文件生成一个存储的文件名
-        String saveFileName = getSaveFileName(fileItem);
-        // 调用输入输出流写入文件
         FileOutputStream outputStream = null;
         InputStream inputStream = null;
         try {
-            outputStream = new FileOutputStream(savePath.getPath() + File.separator + saveFileName);
+            outputStream = new FileOutputStream(createFilePath(fileItem));
             inputStream = fileItem.getInputStream();
             int len = 0;
             byte[] buffer = new byte[1024];
@@ -169,29 +190,51 @@ public class FileUtils {
         }
     }
 
-
     /**
-     * 获取文件的保存路径
+     * 生成文件保存路径
      * @param fileItem
      * @return
      */
-    private static File getSavePath(FileItem fileItem) {
-        int hashCode = fileItem.hashCode();
-        int firstDir = hashCode & 0xf;
-        int secondDir = (hashCode >> 4) & 0xf;
-        File path = new File(SAVE_PATH + File.separator + firstDir + File.separator + secondDir);
-        if (!path.exists()){
-            path.mkdirs();
+    private static File createFilePath(FileItem fileItem) {
+        String originFileName = getOriginFileName(fileItem);
+        File dir = getFileDir(originFileName);
+        if (!dir.exists()){
+            dir.mkdirs();
         }
+        File path = new File(dir.getPath() + File.separator + createFileName(fileItem));
         return path;
     }
 
     /**
-     * 获取文件保存名
+     * 根据原始文件名获取文件的保存目录
+     * @param fileName
+     * @return
+     */
+    private static  File getFileDir(String fileName){
+        int hashCode = fileName.hashCode();
+        int firstDir = hashCode & 0xf;
+        int secondDir = (hashCode >> 4) & 0xf;
+        File dir = new File(SAVE_PATH + File.separator + firstDir + File.separator + secondDir);
+        return dir;
+    }
+
+    /**
+     * 根据文件的唯一识别名获取文件对象
+     * @param fileUUIDName
+     * @return
+     */
+    private static File getFile(String fileUUIDName){
+        String originFileName = getOriginFileName(fileUUIDName);
+        File dir = getFileDir(originFileName);
+        return new File(dir.getPath() + File.separator + "_" + fileUUIDName);
+    }
+
+    /**
+     * 生成唯一的文件名
      * @param fileItem
      * @return
      */
-    private static String getSaveFileName(FileItem fileItem) {
+    private static String createFileName(FileItem fileItem) {
         return UUID.randomUUID() + "_" + getOriginFileName(fileItem);
     }
 
@@ -207,6 +250,15 @@ public class FileUtils {
             originFileName = fullFileName.substring(fullFileName.lastIndexOf(File.separator) + 1);
         }
         return originFileName;
+    }
+
+    /**
+     * 根据以保存文件的uuid名获取到文件的原始名称
+     * @param fileUUIDName
+     * @return
+     */
+    private static String getOriginFileName(String fileUUIDName){
+        return fileUUIDName.substring(fileUUIDName.indexOf("_") + 1);
     }
 
 }

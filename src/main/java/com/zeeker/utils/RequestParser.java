@@ -9,6 +9,7 @@ package com.zeeker.utils;
 
 import com.zeeker.utils.file.FileUtils;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -45,6 +46,9 @@ public class RequestParser {
                 }
                 map.put(NORMAL_ITEMS, normalItems);
                 map.put(MULTIPART_ITEMS, multipartItems);
+            } catch (FileUploadBase.FileSizeLimitExceededException e){
+                e.printStackTrace();
+                throw  new RuntimeException("文件大小超出限制");
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
