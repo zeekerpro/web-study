@@ -35,7 +35,7 @@ public class EncodingFilter extends BaseFilter{
     /**
      * 包装 request ，解决 get 请求方式乱码问题
      */
-    private class RequestWapper extends HttpServletRequestWrapper{
+    private final class RequestWapper extends HttpServletRequestWrapper{
         public RequestWapper(HttpServletRequest request) {
             super(request);
         }
