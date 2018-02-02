@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public class GzipFilter extends BaseFilter{
@@ -29,7 +30,6 @@ public class GzipFilter extends BaseFilter{
     protected void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         ResponseWapper responseWapper = new ResponseWapper(response);
         filterChain.doFilter(request, responseWapper);
-
         // 取出数据
         byte[] outData = responseWapper.getBuffer();
         // 压缩数据
@@ -49,7 +49,7 @@ public class GzipFilter extends BaseFilter{
         private HttpServletResponse response;
 
         private ByteArrayOutputStream bufferStream = new ByteArrayOutputStream();
-        private PrintWriter printWriter = new PrintWriter(bufferStream);
+        private PrintWriter printWriter ;
 
         public ResponseWapper(HttpServletResponse response) {
             super(response);
@@ -63,6 +63,7 @@ public class GzipFilter extends BaseFilter{
 
         @Override
         public PrintWriter getWriter() throws IOException {
+            printWriter = new PrintWriter(new OutputStreamWriter(bufferStream, response.getCharacterEncoding()));
             return printWriter;
         }
 
