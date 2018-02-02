@@ -11,6 +11,7 @@ package com.zeeker.keychain.filter;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -20,11 +21,11 @@ public class EncodingFilter extends BaseFilter{
     private static final String DEFAULT_CHARSET = "UTF-8";
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        super.doFilter(servletRequest, servletResponse, filterChain);
+    protected void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         // 获取要设置的字符集
         String charset = filterConfig.getInitParameter("charset");
         charset = charset == null ? DEFAULT_CHARSET : charset;
+
         request.setCharacterEncoding(charset);
         response.setCharacterEncoding(charset);
         response.setContentType("text/html;charset=" + charset);
@@ -36,8 +37,12 @@ public class EncodingFilter extends BaseFilter{
      * 包装 request ，解决 get 请求方式乱码问题
      */
     private final class RequestWapper extends HttpServletRequestWrapper{
+
+        private HttpServletRequest request;
+
         public RequestWapper(HttpServletRequest request) {
             super(request);
+            this.request = request;
         }
 
         @Override

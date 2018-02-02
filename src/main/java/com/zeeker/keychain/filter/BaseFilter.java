@@ -13,11 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class BaseFilter implements Filter {
+public abstract class BaseFilter implements Filter {
 
     protected FilterConfig filterConfig;
-    protected HttpServletResponse response;
-    protected HttpServletRequest request;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -26,12 +24,16 @@ public class BaseFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        this.request = (HttpServletRequest)servletRequest;
-        this.response = (HttpServletResponse)servletResponse;
+        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletResponse response = (HttpServletResponse)servletResponse;
+        handle(request, response, filterChain);
     }
 
     @Override
     public void destroy() {
 
     }
+
+    protected abstract void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException;
+
 }

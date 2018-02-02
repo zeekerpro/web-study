@@ -11,13 +11,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CacheFilter extends BaseFilter{
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        super.doFilter(servletRequest, servletResponse, filterChain);
 
+    @Override
+    protected void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         // 获取用户想要访问的资源
         String uri = request.getRequestURI();
 
@@ -32,6 +33,7 @@ public class CacheFilter extends BaseFilter{
         }
 
         response.setDateHeader("expires", System.currentTimeMillis() + expires * 60 * 1000);
+
         filterChain.doFilter(request, response);
     }
 

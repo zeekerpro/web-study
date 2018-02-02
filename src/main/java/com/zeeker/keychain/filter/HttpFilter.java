@@ -13,22 +13,27 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class HttpFilter extends BaseFilter{
+
+
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        super.doFilter(servletRequest, servletResponse, filterChain);
+    protected void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         filterChain.doFilter(new EscapeRequest(request), response);
     }
-
 
     /**
      * 将请求数据转义
      */
     private final class EscapeRequest extends HttpServletRequestWrapper {
+
+        private  HttpServletRequest request;
+
         public EscapeRequest(HttpServletRequest request) {
             super(request);
+            this.request = request;
         }
 
         @Override

@@ -8,13 +8,14 @@
 package com.zeeker.keychain.filter;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class NoCacheFilter extends BaseFilter{
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        super.doFilter(servletRequest, servletResponse, filterChain);
+    protected void handle(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         response.setDateHeader("Expires", -1);
         response.setHeader("Cache-Control", "no-cache");
         response.setHeader("Prama", "no-cache");
