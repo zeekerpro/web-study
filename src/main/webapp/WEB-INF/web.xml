@@ -9,6 +9,10 @@
         <welcome-file>/index.jsp</welcome-file>
     </welcome-file-list>
 
+    <listener>
+        <listener-class>com.zeeker.keychain.listener.SessionScaner</listener-class>
+    </listener>
+
     <filter>
         <filter-name>EncodingFilter</filter-name>
         <filter-class>com.zeeker.keychain.filter.EncodingFilter</filter-class>

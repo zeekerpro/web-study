@@ -2,15 +2,13 @@
  * @fileName :     CacheFilter
  * @author :       zeeker
  * @date :         1/30/18 8:52 AM
- * @description :   控制静态资源缓存时间
+ * @description :   控制静态资源在客户端的缓存
  */
 
 package com.zeeker.keychain.filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

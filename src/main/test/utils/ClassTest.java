@@ -7,6 +7,7 @@
 
 package utils;
 
+import com.mysql.cj.jdbc.SuspendableXAConnection;
 import org.junit.Test;
 
 public class ClassTest {
@@ -24,7 +25,7 @@ public class ClassTest {
         threadLocal.set(80);
         System.out.println(threadLocal.get());
         System.out.println(threadLocal.get());
-
         throw new RuntimeException("不支持的文件类型");
     }
+
 }

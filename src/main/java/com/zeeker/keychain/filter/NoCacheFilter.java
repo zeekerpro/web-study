@@ -2,7 +2,7 @@
  * @fileName :     NoCacheFilter
  * @author :       zeeker
  * @date :         1/30/18 8:21 AM
- * @description :  控制jsp不在客户端浏览器缓存
+ * @description :  控制动态jsp数据不在客户端缓存
  */
 
 package com.zeeker.keychain.filter;
